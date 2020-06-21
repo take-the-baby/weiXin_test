@@ -1,13 +1,55 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="home-index">
+  <!-- 搜索组件 -->
+  <search></search>
+  <!-- 轮播图 -->
+  <view class="swiper-data">
+    <swiper autoplay indicator-dots circular indicator-active-color='#fff'>
+      <swiper-item 
+      wx:for="{{swiperList}}"
+      wx:key="goods_id"
+      class="swiper-item"
+      >
+        <navigator>
+          <image mode="widthFix" src="{{item.image_src}}" class="swiper-images"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <!-- 分类导航 -->
+  <view class="home-cates">
+    <navigator
+    wx:for="{{catesList}}"
+    wx:key="name"
+    class="cates-item"
+    >
+      <image src="{{item.image_src}}" mode="widthFix" class="cates-image"></image>
+    </navigator>
+  </view>
+  <!-- 楼层视图 -->
+  <view class="home-floor">
+    <view class="floor-item"
+    wx:for="{{floorData}}"
+    wx:for-item="item1"
+    wx:for-index="index1"
+    wx:key="floor_title"
+    >
+      <!-- 标题 -->
+      <view class="floor-title">
+        <image mode="widthFix" src="{{item1.floor_title.image_src}}" class="floor-title-image"></image>
+      </view>
+      <!-- 内容 -->
+      <view class="floor-main">
+        <navigator
+        wx:for="{{item1.product_list}}"
+        wx:for-item="item2"
+        wx:for-index="index2"
+        wx:key="name"
+        class="floor-main-item"
+        >
+        <image mode="{{index2 === 0 ? 'aspectFit' : 'widthFix'}}" src="{{item2.image_src}}" class=" {{index2 === 0 ? 'first-image' : 'floor-main-image'}}"></image>
+        </navigator>
+      </view>
+    </view>
   </view>
 </view>
