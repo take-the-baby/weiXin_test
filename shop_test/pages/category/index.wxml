@@ -1,2 +1,45 @@
 <!--pages/category/index.wxml-->
-<text>pages/category/index.wxml</text>
+<view class="category">
+  <!-- 搜索组件 -->
+  <search></search>
+  <view class="cates-maim">
+    <!-- 左侧菜单 -->
+    <scroll-view class="left-list" scroll-y>
+      <view
+      wx:for="{{leftListData}}"
+      wx:key="item"
+      class="{{activeIndex === index? 'active-item' : 'left-list-item'}}"
+      bindtap="leftListClick"
+      data-index="{{index}}"
+      >
+      {{item}}
+      </view>
+    </scroll-view>
+    <!-- 右侧商品列表 -->
+    <scroll-view class="right-content" scroll-y>
+      <!-- 分类遍历 -->
+      <view
+      wx:for="{{rightListData}}"
+      wx:for-item="item1"
+      wx:for-index="index1"
+      wx:key="index1"
+      >
+        <!-- 分类标题 -->
+        <view class="goods-title">/ {{item1.cat_name}} /</view>
+        <view class="goods-list">
+          <navigator
+          class="goods-list-navigator"
+          wx:for="{{item1.children}}"
+          wx:for-item="item2"
+          wx:for-index="index2"
+          wx:key="index2"
+        >
+            <image mode="widthFix" src="{{item2.cat_icon}}"></image>
+            <view class="goods-list-name">{{item2.cat_name}}</view>
+          </navigator>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  
+</view>
