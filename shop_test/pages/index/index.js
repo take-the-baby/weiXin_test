@@ -16,7 +16,7 @@ Page({
   },
   // 获取轮播图数据
   getSwiperData() {
-    request({url:'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata'}).then(res =>{
+    request({url:'/home/swiperdata'}).then(res =>{
       if(res.data && res.data.meta.status == 200) {
         this.setData({
         swiperList: res.data.message
@@ -26,7 +26,7 @@ Page({
   },
   // 获取分类导航数据
   getCateData() {
-    request({url:'https://api-hmugo-web.itheima.net/api/public/v1/home/catitems'}).then(res =>{
+    request({url:'/home/catitems'}).then(res =>{
       if(res.data && res.data.meta.status == 200) {
         this.setData({
           catesList: res.data.message
@@ -36,7 +36,7 @@ Page({
   },
   // 获取楼层视图的数据
   getFloorData() {
-    request({url:'https://api-hmugo-web.itheima.net/api/public/v1/home/floordata'}).then(res =>{
+    request({url:'/home/floordata'}).then(res =>{
       if(res.data && res.data.meta.status == 200) {
         this.setData({
           floorData: res.data.message

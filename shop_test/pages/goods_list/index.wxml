@@ -1,2 +1,11 @@
 <!--pages/goods_list/index.wxml-->
-<text>pages/goods_list/index.wxml</text>
+<view class="goods-list">
+  <!-- 搜索框 -->
+  <search></search>
+  <!-- tabs组件 -->
+  <tabs tabsData="{{tabsData}}" bindtabsClick="tabsClick">
+    <block wx-if="{{tabsData[0].isActive}}">1</block>
+    <block wx-if="{{tabsData[1].isActive}}">2</block>
+    <block wx-if="{{tabsData[2].isActive}}">3</block>
+  </tabs>
+</view>

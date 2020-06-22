@@ -9,7 +9,8 @@ Page({
     leftListData: [],// 左边列表数据
     rightListData: [], // 右边列表数据
     cates:[], // 接口返回数据
-    activeIndex: 0, 
+    activeIndex: 0, // 左侧点击的菜单列表的index 
+    scrollTop: 0, // 右侧点击距离顶部的距离
   },
   /**
    * 生命周期函数--监听页面加载
@@ -36,23 +37,38 @@ Page({
     }
   },
   // 获取分类数据
-  getCatesData() {
-    request({'url':'https://api-hmugo-web.itheima.net/api/public/v1/categories'}).then(res =>{
-      if(res.data && res.data.meta.status == 200) {
-        wx.setStorageSync('cates', {
-          time: Date.now(),
-          data:  res.data.message
-        })
-        const resData = res.data.message;
-        const leftListData = resData.map(item =>{return item.cat_name});
-        const rightListData = resData[0].children;
-        this.setData({
-          cates: resData,
-          leftListData: leftListData,
-          rightListData: rightListData
-        })
-      }
-    })
+  async getCatesData() {
+    // request({'url':'/categories'}).then(res =>{
+    //   if(res.data && res.data.meta.status == 200) {
+    //     wx.setStorageSync('cates', {
+    //       time: Date.now(),
+    //       data:  res.data.message
+    //     })
+    //     const resData = res.data.message;
+    //     const leftListData = resData.map(item =>{return item.cat_name});
+    //     const rightListData = resData[0].children;
+    //     this.setData({
+    //       cates: resData,
+    //       leftListData: leftListData,
+    //       rightListData: rightListData
+    //     })
+    //   }
+    // })
+    const res = await request({'url':'/categories'});
+    if(res.data && res.data.meta.status == 200) {
+      wx.setStorageSync('cates', {
+        time: Date.now(),
+        data:  res.data.message
+      })
+      const resData = res.data.message;
+      const leftListData = resData.map(item =>{return item.cat_name});
+      const rightListData = resData[0].children;
+      this.setData({
+        cates: resData,
+        leftListData: leftListData,
+        rightListData: rightListData
+      })
+    }
   },
   // 左侧列表点击事件
   leftListClick(e) {
@@ -60,7 +76,8 @@ Page({
     const rightListData = this.data.cates[index].children;
     this.setData({
       activeIndex: index,
-      rightListData: rightListData
+      rightListData: rightListData,
+      scrollTop: 0
     })
   }
 })
