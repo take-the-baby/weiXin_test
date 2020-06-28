@@ -10,6 +10,7 @@
         class="goods-list-item"
         wx:for="{{goodsListData}}"
         wx:key="index"
+        url="/pages/goods_detail/index?goods_id={{item.goods_id}}"
         >
           <!-- 左侧图片 -->
           <image class="goods-list-image" mode="widthFix" src="{{item.goods_small_logo || 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592897985778&di=beca9e11179337c9f13e4d7ffb5b6930&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fa577b8452cbd2ed2c9aa405fb46c8a16506a5e5611b65-yFxDOp_fw658'}}"></image>

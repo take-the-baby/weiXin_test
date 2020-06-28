@@ -1,2 +1,15 @@
 <!--pages/cart/index.wxml-->
-<text>pages/cart/index.wxml</text>
+<view class="cart">
+  <!-- 收货地址 不存在收货地址时-->
+  <view class="receipt-address" wx-if="">
+    <button type="primary" plain bindtap="handAddrewss">添加收货地址</button>
+  </view>
+  <!-- 当存在收货地址时 -->
+  <view class="address-detail">
+    <view class="address-item">
+      <view>收货人:{{address.userName}}</view>
+      <view>{{address.provinceName+address.cityName+address.countyName+address.detailInfo}}</view>
+    </view>
+    <view class="address-item2">{{address.telNumber}}</view>
+  </view>
+</view>

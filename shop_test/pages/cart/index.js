@@ -5,62 +5,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    address:{}, // 收货地址
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  //添加收货地址
+  handAddrewss() {
+    wx.getSetting({
+      success: (res) => {
+        // 用户已授权
+        const scopeAddress = res.authSetting['scope.address'];
+        if(scopeAddress === true || scopeAddress === undefined) {
+          wx.chooseAddress({
+            success: (res1) => {
+              wx.setStorageSync('address', res1)
+            },
+          })
+        } else {
+          // 用户拒绝，诱导用户重新获取地址权限
+          wx.openSetting({
+            success: (result) => {
+              wx.chooseAddress({
+                success: (res2) => {
+                  wx.setStorageSync('address', res2)
+                },
+              })
+            },
+          })
+        }
+      },
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 给收货地址赋值
+  onShow() {
+    const data = wx.getStorageSync("address") || {}
+    this.setData({
+      address:data,
+    })
   }
 })

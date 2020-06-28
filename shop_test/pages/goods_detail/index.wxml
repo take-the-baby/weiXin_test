@@ -1,2 +1,54 @@
-<!--pages/goods_detail/index.wxml-->
-<text>pages/goods_detail/index.wxml</text>
+
+<view class="goods-detail">
+  <!-- 轮播图 -->
+  <swiper autoplay indicator-dots circular indicator-active-color='#fff'>
+    <swiper-item 
+    wx:for="{{goodsDetail.pics}}"
+    wx:key="index"
+    class="swiper-item"
+    bindtap="handPreviewIamge"
+    data-url="{{item.pics_mid}}"
+    >
+      <image mode="widthFix" src="{{item.pics_mid}}" class="image-detail"></image>   
+    </swiper-item>
+  </swiper>
+  <!-- 商品信息 -->
+  <view class="goods-price">￥{{goodsDetail.goods_price}}</view>
+  <view class="goods-text">
+    <view class="goods-name">
+      {{goodsDetail.goods_name}}
+    </view>
+    <view class="goods-sc">
+      <image src="../../icons/shoucang.png" mode="widthFix"></image>
+      <text>收藏</text>
+    </view>
+  </view>
+  <!-- 图文信息 -->
+  <view>
+    <view class="goods-pic-name">图文详情</view>
+      <rich-text nodes="{{goodsDetail.goods_introduce}}"></rich-text>
+  </view>
+  <!-- 下方工具栏部分 -->
+  <view class="goods-tool">
+    <view class="goods-tool-item">
+      <image class="goods-tool-image" src="../../icons/kefu.png" mode="widthFix"></image>
+      <text>客服</text>
+      <button open-type="contact"></button>
+    </view>
+    <view class="goods-tool-item">
+      <image class="goods-tool-image" src="../../icons/fenxiang.png" mode="widthFix"></image>
+      <text>分享</text>
+      <button open-type="share"></button>
+    </view>
+    <navigator class="goods-tool-item" open-type="switchTab" url="/pages/cart/index">
+      <image class="goods-tool-image" src="../../icons/gouwuche3.png" mode="widthFix"></image>
+      <text>购物车</text>
+    </navigator>
+    <view class="goods-tool-item big-button" bindtap="addShopping">
+      <text>加入购物车</text>
+    </view>
+    <view class="goods-tool-item big-button2">
+      <text>立即购买</text>
+    </view>
+  </view>
+</view>

@@ -1,1 +1,17 @@
 /* pages/cart/index.wxss */
+.receipt-address {
+  padding: 10rpx;
+}
+.address-detail {
+  padding: 10rpx;
+}
+.address-detail {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+.address-item {
+  flex: 2;
+}
+.address-item2 {
+  flex: 1;
+}
