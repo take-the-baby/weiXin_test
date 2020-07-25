@@ -48,6 +48,7 @@ Page({
       cart[index].num++;
     } else {
       this.data.goodsDetail.num = 1;
+      this.data.goodsDetail.checked = false;
       cart.push(this.data.goodsDetail)
     }
     wx.setStorageSync("cart", cart)
